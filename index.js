@@ -5,6 +5,12 @@ const cloudinary = require("cloudinary").v2;
 
 const app = express();
 
+cloudinary.config({
+  cloud_name: "",
+  api_key: "",
+  api_secret: "",
+});
+
 app.set("view engine", "ejs");
 
 //middleware
@@ -14,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   fileUpload({
     useTempFiles: true,
-    tempFileDir: "/tmp/",
+    tempFileDir: "./tmp/",
   })
 );
 
@@ -23,18 +29,22 @@ app.get("/myget", (req, res) => {
   res.send(req.query);
 });
 
-app.post("/mypost", (req, res) => {
+app.post("/mypost", async (req, res) => {
   console.log(req.body);
   console.log(req.files);
 
   let file = req.files.samplefile;
-  let results = cloudinary.uploader.upload(file, {
+
+  let results = await cloudinary.uploader.upload(file.tempFilePath, {
     folder: "users",
   });
+
+  console.log(results);
 
   details = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
+    results: results,
   };
 
   res.send(details);
