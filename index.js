@@ -9,10 +9,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/myget", (req, res) => {
+  console.log(req.query);
+  res.send(req.query);
+});
+
+app.get("/mygetform", (req, res) => {
   res.render("getform");
 });
 
-app.get("/mypost", (req, res) => {
+app.get("/mypostform", (req, res) => {
   res.render("postform");
 });
 
