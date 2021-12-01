@@ -15,10 +15,11 @@
   <body class="bg-dark text-white">
     <div class="container mt-4 col-4 col-offset-6">
       <h1 class="display-3">POST Form</h1>
-      <form>
+      <form method="POST" action="/mypost" enctype="multipart/form-data">
         <div class="mb-3">
           <label for="firstname" class="form-label">firstname</label>
           <input
+            name="firstname"
             type="text"
             class="form-control"
             id="firstname"
@@ -30,7 +31,21 @@
         </div>
         <div class="mb-3">
           <label for="lastname" class="form-label">lastname</label>
-          <input type="password" class="form-control" id="lastname" />
+          <input
+            name="lastname"
+            type="text"
+            class="form-control"
+            id="lastname"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="samplefile" class="form-label">samplefile</label>
+          <input
+            name="samplefile"
+            type="file"
+            class="form-control"
+            id="samplefile"
+          />
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
